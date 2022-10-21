@@ -32,7 +32,7 @@ From version 0.3, we support custom headers, so you can use Basic Authentication
 3. Download the zip we packed，deploy with nginx
 4. Deploy with docker
 
-    ``` docker run -d --name kong-admin-ui -p 8899:80 icdevin/kong-admin-ui:0.6.1 ```
+    ```docker run -d --name kong-admin-ui -p 8899:80 icdevin/kong-admin-ui```
 
 ## Screenshots
 
