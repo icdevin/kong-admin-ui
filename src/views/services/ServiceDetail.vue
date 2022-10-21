@@ -8,12 +8,10 @@
 
         <div id="service-info">
 
-            <Row>
-                <Col span="12"><h1>{{$t('service.serviceInfo')}}</h1></Col>
-                <Col span="12" style="text-align:right;position: absolute;top: 50%;right: 0px">
-                    <b-button variant="primary" size="sm" @click="editService">{{$t('common.edit')}}</b-button>
-                </Col>
-            </Row>
+            <div class="header">
+                <h1>{{$t('service.serviceInfo')}}</h1>
+                <b-button variant="primary" size="sm" @click="editService">{{$t('common.edit')}}</b-button>
+            </div>
             <Card>
                 <Row>
                     <Col span="6"><span>id:</span> {{ service.id }}</Col>
@@ -35,30 +33,30 @@
                 </Row>
             </Card>
         </div>
-        <Divider/>
+
+        <Divider />
+
         <div id="route-info">
-            <Row>
-                <Col span="12"><h1>{{$t('service.routeInfo')}}</h1></Col>
-                <Col span="12" style="text-align:right;position: absolute;top: 50%;right: 0px">
-                    <b-button variant="primary" size="sm" @click="addRoute">{{$t('common.add')}}</b-button>
-                </Col>
-            </Row>
+            <div class="header">
+                <h2>{{$t('service.routeInfo')}}</h2>
+                <b-button variant="primary" size="sm" @click="addRoute">{{$t('common.add')}}</b-button>
+            </div>
             <div>
                 <RouteTable v-bind:routes="routes"></RouteTable>
             </div>
         </div>
-        <Divider/>
+
+        <Divider />
+
         <div id="upstream-info">
-            <Row>
-                <Col span="12"><h1>{{$t('service.service_upstream')}}</h1></Col>
-                <Col span="12" style="text-align:right;position: absolute;top: 50%;right: 0px" v-if="upstreamExisted">
-                    <b-button variant="primary" size="sm" @click="editUpstream()">{{$t('common.edit')}}</b-button>
-                </Col>
-            </Row>
+            <div class="header">
+                <h2>{{$t('service.service_upstream')}}</h2>
+                <b-button v-if="upstreamExists" variant="primary" size="sm" @click="editUpstream()">{{$t('common.edit')}}</b-button>
+            </div>
             <Card>
-                <div v-if="!upstreamExisted">
-                    {{$t('service.upstreamNotExisted', { host: service.host })}}
-                    <b-button variant="primary" size="sm" @click="addUpstream(service.host)">{{$t('common.add')}}</b-button>
+                <div class="service-not-exists" v-if="!upstreamExists">
+                    {{$t('service.upstreamNotExists', { host: service.host })}}
+                    <b-button variant="primary" @click="addUpstream(service.host)">{{$t('common.add')}}</b-button>
                 </div>
                 <div v-else>
                     <Row>
@@ -96,12 +94,10 @@
         </div>
         <Divider/>
         <div id="plugins">
-            <Row>
-                <Col span="12"><h1>Plugins</h1></Col>
-                <Col span="12" style="text-align:right;position: absolute;top: 50%;right: 0px">
-                    <b-button variant="primary" size="sm" @click="addPlugin()">{{$t('breadcrumb.addPlugin')}}</b-button>
-                </Col>
-            </Row>
+            <div class="header">
+                <h2>Plugins</h2>
+                <b-button variant="primary" size="sm" @click="addPlugin()">{{$t('breadcrumb.addPlugin')}}</b-button>
+            </div>
             <PluginTable v-bind:plugins="plugins"></PluginTable>
 
         </div>
@@ -134,7 +130,7 @@
                 service: {},
                 routes: [],
                 upstream: {},
-                upstreamExisted:true,
+                upstreamExists:true,
                 plugins:[]
             }
         },
@@ -204,9 +200,8 @@
                         highlightCode();
                     })
                 }, error => {
-                    if (error.response.status===404||error.response.status===400) {
-                        //upstream not existed
-                        this.upstreamExisted=false;
+                    if (error.response.status === 404 || error.response.status === 400) {
+                        this.upstreamExists = false;
                     }
 
                 });
@@ -271,5 +266,18 @@
 
     Row {
         color: aqua;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 10px 0;
+    }
+
+    .service-not-exists {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 </style>

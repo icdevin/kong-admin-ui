@@ -197,32 +197,32 @@
                 if (this.formItem.url) {
                     param.url = this.formItem.url;
                 }
-                if (this.formItem.sources!=null&&this.formItem.sources.length>0) {
+                if(this.formItem.sources!=null&&this.formItem.sources.length>0) {
                     param.sources=this.formItem.sources;
                 }else{
                     param.sources=null;
                 }
-                if (this.formItem.destinations!=null&&this.formItem.destinations.length>0) {
+                if(this.formItem.destinations!=null&&this.formItem.destinations.length>0) {
                     param.destinations=this.formItem.destinations;
                 }else{
                     param.destinations=null;
                 }
-                if (this.formItem.protocols!=null&&this.formItem.protocols.length>0) {
+                if(this.formItem.protocols!=null&&this.formItem.protocols.length>0) {
                     param.protocols=this.formItem.protocols;
                 }else{
                     param.protocols=null;
                 }
-                if (this.formItem.hosts!=null&&this.formItem.hosts.length>0) {
+                if(this.formItem.hosts!=null&&this.formItem.hosts.length>0) {
                     param.hosts=this.formItem.hosts;
                 }else{
                     param.hosts=null;
                 }
-                if (this.formItem.methods!=null&&this.formItem.methods.length>0) {
+                if(this.formItem.methods!=null&&this.formItem.methods.length>0) {
                     param.methods=this.formItem.methods;
                 }else{
                     param.methods=null;
                 }
-                if (this.formItem.paths!=null&&this.formItem.paths.length>0) {
+                if(this.formItem.paths!=null&&this.formItem.paths.length>0) {
                     param.paths=this.formItem.paths;
                 }else{
                     param.paths=null;
@@ -238,7 +238,7 @@
                 param.strip_path=this.formItem.strip_path;
                 param.preserve_host=this.formItem.preserve_host;
 
-                if (this.formItem.snis!=null&&this.formItem.snis.length>0) {
+                if(this.formItem.snis!=null&&this.formItem.snis.length>0) {
                     param.snis=this.formItem.snis;
                 }else{
                     param.snis=null;
@@ -260,7 +260,7 @@
                 let _this = this;
                 this._get('/routes/' + this.routeId, response => {
                     let data=response.data;
-                    if (data.methods===null) {
+                    if(data.methods===null) {
                         data.methods=[];
                     }
                     _this.formItem = data;
@@ -275,13 +275,13 @@
                 });
             },
             addDestination() {
-                if (this.formItem.destinations==null) {
+                if(this.formItem.destinations==null) {
                     this.formItem.destinations=[];
                 }
                 this.formItem.destinations.push({ip:'',port:''});
             },
             addSource() {
-                if (this.formItem.sources==null) {
+                if(this.formItem.sources==null) {
                     this.formItem.sources=[];
                 }
                 this.formItem.sources.push({ip:'',port:''});
@@ -314,7 +314,7 @@
             },
             headers: {
                 set: function (newValue) {
-                    if (newValue) {
+                    if(newValue) {
                         this.formItem.headers = JSON.parse(newValue);
                     }else{
                         this.formItem.headers = null;

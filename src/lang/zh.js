@@ -63,7 +63,7 @@ export default {
         serviceInfo:'Service信息',
         routeInfo:'Route信息',
         service_upstream:'Service的Upstream',
-        upstreamNotExisted:'名为`{host}`的上游服务器不存在，如果不是外部host,您需要添加一个叫{host}的上游服务器',
+        upstreamNotExists:'名为`{host}`的上游服务器不存在，如果不是外部host,您需要添加一个叫{host}的上游服务器',
         fieldServiceName:'Service名称',
         fieldRetries:'失败时重试次数.',
         fieldProtocol:'与上游服务器通讯使用的协议',
