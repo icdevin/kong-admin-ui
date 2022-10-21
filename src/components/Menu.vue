@@ -9,64 +9,46 @@
                     </MenuItem>
                 </router-link>
 
-                <Submenu name="service">
-                    <template slot="title">
+                <router-link to="/services">
+                    <MenuItem name="service-list">
                         <Icon type="ios-paper"/>
-                        Service
-                    </template>
-                    <router-link to="/services">
-                        <MenuItem name="service-list">{{$t('breadcrumb.service_list')}}</MenuItem>
-                    </router-link>
-                </Submenu>
-                <Submenu name="route">
-                    <template slot="title">
+                        {{$t('breadcrumb.services')}}
+                    </MenuItem>
+                </router-link>
+
+                <router-link to="/routes">
+                    <MenuItem name="route-list">
                         <Icon type="ios-people"/>
-                        Route
-                    </template>
-                    <router-link to="/routes">
-                        <MenuItem name="route-list">{{$t('breadcrumb.route_list')}}</MenuItem>
-                    </router-link>
-                </Submenu>
-                <Submenu name="upstream">
-                    <template slot="title">
+                        {{$t('breadcrumb.routes')}}
+                    </MenuItem>
+                </router-link>
+
+                <router-link to="/upstreams">
+                    <MenuItem name="upstream-list">
                         <Icon type="ios-desktop"/>
-                        Upstream
-                    </template>
-                    <router-link to="/upstreams">
-                        <MenuItem name="upstream-list">{{$t('breadcrumb.upstream_list')}}</MenuItem>
-                    </router-link>
+                        {{$t('breadcrumb.upstreams')}}
+                    </MenuItem>
+                </router-link>
 
-                </Submenu>
-                <Submenu name="consumer">
-                    <template slot="title">
+                <router-link to="/consumers">
+                    <MenuItem name="consumer-list">
                         <Icon type="ios-person"/>
-                        Consumer
-                    </template>
-                    <router-link to="/consumers">
-                        <MenuItem name="consumer-list">{{$t('breadcrumb.consumer_list')}}</MenuItem>
-                    </router-link>
+                        {{$t('breadcrumb.consumers')}}
+                    </MenuItem>
+                </router-link>
 
-                </Submenu>
-                <Submenu name="plugin">
-                    <template slot="title">
+                <router-link to="/plugins">
+                    <MenuItem name="plugin-list">
                         <Icon type="ios-glasses"/>
-                        Plugin
-                    </template>
-                    <router-link to="/plugins">
-                        <MenuItem name="plugin-list">{{$t('breadcrumb.plugin_list')}}</MenuItem>
-                    </router-link>
-
-                </Submenu>
-                <Submenu name="certificate">
-                    <template slot="title">
+                        {{$t('breadcrumb.plugins')}}
+                    </MenuItem>
+                </router-link>
+                <router-link to="/certificates">
+                    <MenuItem name="certificate-list">
                         <Icon type="ios-key"/>
-                        Certificate
-                    </template>
-                    <router-link to="/certificates">
-                        <MenuItem name="certificate-list">{{$t('breadcrumb.certificate_list')}}</MenuItem>
-                    </router-link>
-
-                </Submenu>
+                        {{$t('breadcrumb.certificates')}}
+                    </MenuItem>
+                </router-link>
             </Menu>
         </Col>
     </Row>
