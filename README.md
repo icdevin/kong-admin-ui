@@ -1,44 +1,41 @@
-# Kong admin UI
+# Kong Admin UI
 
 [中文](README_zh.md)
 
-A Web UI for the Kong(The Cloud-Native API Gateway & Service Mesh) admin api.
+A web UI for the Kong (the cloud-native API gateway & service mesh) admin API.
 
-It's a font-end application,no need any back-end server.All requests to Kong admin api is send by user's browser.
+It's a front-end application, no need any back-end server. All requests to Kong admin API is sent by user's browser.
 
-If you can visit our [demo](https://pocketdigi.github.io/kong-admin-ui) ,and your current device can visit kong admin api directly,you can use our demo to manage your Kong,it's safe. 
+If you can visit our [demo](https://pocketdigi.github.io/kong-admin-ui), and your current device can visit kong admin API directly, you can use our demo to manage your Kong, it's safe.
 
-[demo on github page](https://pocketdigi.github.io/kong-admin-ui) `https` protocol,so your kong admin api must `https` too.
+[Demo on GitHub page](https://pocketdigi.github.io/kong-admin-ui) `https` protocol, so your Kong admin API must `https` too.
+[Demo on pocketdigi.com](http://kong-admin.pocketdigi.com) `http` protocol, the server is in China.
 
-[demo on pocketdigi.com](http://kong-admin.pocketdigi.com) `http` protocol,the server is in China.
-
-
-
-### Features
-* Basic Info (configurations and status)
+## Features
+* Basic info (configurations and status)
 * Service management
 * Route management
-* Upstream management(include target)
+* Upstream management (include target)
 * Consumer management
 * Plugin management
-* Authentication management(Support Basic Authentication, HMAC Authentication, JWT, Key Authentication, OAuth 2.0 Authentication)
+* Authentication management (supports Basic Authentication, HMAC, JWT, Key Authentication, and OAuth 2.0)
 * Certificate management
 
-**Only support kong 0.14.x and above.**
+**Only supports Kong 0.14.x and above.**
 
-From version 0.3, we support custom headers,so you can use Basic Authentication plugin and Cors plugin on your Kong Admin Service,and add credential on header. 
+From version 0.3, we support custom headers, so you can use Basic Authentication plugin and CORS plugin on your Kong Admin Service, and add credential on header.
 
 [kong admin ui Custom Headers使用说明 给你的kong加个密码](https://www.pocketdigi.com/20190613/1644.html)
 
-### How to use
-1. If your computer can visit kong admin api and intenet, you can use the demo we deployed.
-2. Clone the source code,compile,deploy with nginx
+## Usage
+1. If your computer can visit Kong admin API and intenet, you can use the demo we deployed.
+2. Clone the source code, compile, deploy with nginx
 3. Download the zip we packed，deploy with nginx
-4. Deploy with docker 
+4. Deploy with docker
 
     ``` docker run -d --name kong-admin-ui -p 8899:80 pocketdigi/kong-admin-ui:0.5.3 ```
 
-### Screenshots
+## Screenshots
 
 
 ![basic info](https://github.com/pocketdigi/kong-admin-ui/raw/master/docs/images/basic_info.png)
