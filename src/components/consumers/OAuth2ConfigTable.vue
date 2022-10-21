@@ -1,19 +1,16 @@
 <template>
     <div id="config">
-        <Row style="margin-bottom: 10px">
-            <Col span="12"><h1>OAuth 2.0 credentials</h1></Col>
-            <Col span="12" style="text-align:right;position: absolute;top: 50%;right: 0px">
-                <Button type="primary" size="small" @click="showModal=true">Create a Credential</Button>
-            </Col>
-        </Row>
-
+        <div class="header">
+            <h2>OAuth 2.0 Credentials</h2>
+            <b-button variant="primary" size="sm" @click="showModal=true">Create a Credential</b-button>
+        </div>
 
         <Table border :columns="columns" :data="configList">
             <template slot-scope="{ row }" slot="name">
                 <strong>{{ row.name }}</strong>
             </template>
             <template slot-scope="{ row }" slot="action">
-                <Button type="error" size="small" @click="deleteDialog(row.id)">Delete</Button>
+                <b-button variant="error" size="sm" @click="deleteDialog(row.id)">Delete</b-button>
             </template>
         </Table>
 
@@ -90,19 +87,19 @@
                 showModal:false
             }
         },
-        mounted(){
+        mounted() {
             this.loadCredential();
         },
         computed:{
             redirectUrls:{
-                get(){
-                    if(this.formItem.redirect_uris.length>0){
+                get() {
+                    if (this.formItem.redirect_uris.length>0) {
                         return this.formItem.redirect_uris.join(',');
                     }
                     return '';
                 },
-                set(newValue){
-                    if(newValue){
+                set(newValue) {
+                    if (newValue) {
                         this.formItem.redirect_uris=newValue.split(',');
                     }else{
                         this.formItem.redirect_uris=[];
@@ -112,7 +109,7 @@
             }
         },
         methods: {
-            loadCredential(){
+            loadCredential() {
                 this._get('/consumers/'+this.consumerId+'/oauth2',response=>{
                     this.configList=response.data.data;
                     this.configList.map(function (config) {
@@ -151,5 +148,12 @@
 <style scoped>
     #config {
         margin-top: 10px;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 20px 0 10px 0;
     }
 </style>

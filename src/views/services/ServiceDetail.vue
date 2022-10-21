@@ -1,25 +1,25 @@
 <template>
     <div id="content">
-        <Breadcrumb>
-            <BreadcrumbItem to="/">{{$t('breadcrumb.home')}}</BreadcrumbItem>
-            <BreadcrumbItem to="/services">Service</BreadcrumbItem>
-            <BreadcrumbItem>{{$t('breadcrumb.service_detail')}}</BreadcrumbItem>
-        </Breadcrumb>
+        <b-breadcrumb>
+            <b-breadcrumb-item href="#/">{{$t('breadcrumb.home')}}</b-breadcrumb-item>
+            <b-breadcrumb-item href="#/services">Service</b-breadcrumb-item>
+            <b-breadcrumb-item>{{$t('breadcrumb.service_detail')}}</b-breadcrumb-item>
+        </b-breadcrumb>
 
         <div id="service-info">
 
             <Row>
-                <Col span="12"><h1>{{$t('service.serviceInfo')}}:</h1></Col>
+                <Col span="12"><h1>{{$t('service.serviceInfo')}}</h1></Col>
                 <Col span="12" style="text-align:right;position: absolute;top: 50%;right: 0px">
-                    <Button type="primary" size="small" @click="editService">{{$t('common.edit')}}</Button>
+                    <b-button variant="primary" size="sm" @click="editService">{{$t('common.edit')}}</b-button>
                 </Col>
             </Row>
             <Card>
                 <Row>
-                    <Col span="9"><span>id:</span> {{ service.id }}</Col>
-                    <Col span="4"><span>name:</span> {{ service.name }}</Col>
+                    <Col span="6"><span>id:</span> {{ service.id }}</Col>
+                    <Col span="6"><span>name:</span> {{ service.name }}</Col>
                     <Col span="6"><span>create_at:</span> {{ service.createAtStr }}</Col>
-                    <Col span="5"><span>updated_at:</span> {{ service.updatedAtStr }}</Col>
+                    <Col span="6"><span>updated_at:</span> {{ service.updatedAtStr }}</Col>
                 </Row>
                 <Row>
                     <Col span="6"><span>host:</span> {{ service.host }}</Col>
@@ -38,9 +38,9 @@
         <Divider/>
         <div id="route-info">
             <Row>
-                <Col span="12"><h1>{{$t('service.routeInfo')}}:</h1></Col>
+                <Col span="12"><h1>{{$t('service.routeInfo')}}</h1></Col>
                 <Col span="12" style="text-align:right;position: absolute;top: 50%;right: 0px">
-                    <Button type="primary" size="small" @click="addRoute">{{$t('common.add')}}</Button>
+                    <b-button variant="primary" size="sm" @click="addRoute">{{$t('common.add')}}</b-button>
                 </Col>
             </Row>
             <div>
@@ -52,12 +52,14 @@
             <Row>
                 <Col span="12"><h1>{{$t('service.service_upstream')}}</h1></Col>
                 <Col span="12" style="text-align:right;position: absolute;top: 50%;right: 0px" v-if="upstreamExisted">
-                    <Button type="primary" size="small" @click="editUpstream()">{{$t('common.edit')}}</Button>
+                    <b-button variant="primary" size="sm" @click="editUpstream()">{{$t('common.edit')}}</b-button>
                 </Col>
             </Row>
             <Card>
-                <!--<div v-if="!upstreamExisted">Upstream `{{service.host}}` is not existed,if it's not a external host,You must <a @click="addUpstream(service.host)">add a Upstream named `{{service.host}}`</a></div>-->
-                <div v-if="!upstreamExisted">{{$t('service.upstreamNotExisted',{host:service.host})}} <Button type="primary" size="small" @click="addUpstream(service.host)">{{$t('common.add')}}</Button></div>
+                <div v-if="!upstreamExisted">
+                    {{$t('service.upstreamNotExisted', { host: service.host })}}
+                    <b-button variant="primary" size="sm" @click="addUpstream(service.host)">{{$t('common.add')}}</b-button>
+                </div>
                 <div v-else>
                     <Row>
                         <Col span="9"><span>id:</span> {{ upstream.id }}</Col>
@@ -83,7 +85,7 @@
                     <Row>
                         <Col span="12"><h3>Targets:</h3></Col>
                         <Col span="12" style="text-align:right;position: absolute;top: 30%;right: 0px">
-                            <Button type="primary" size="small" @click="addTarget">{{$t('common.addTarget')}}</Button>
+                            <b-button variant="primary" size="sm" @click="addTarget">{{$t('common.addTarget')}}</b-button>
                         </Col>
                     </Row>
                     <TargetTable style="margin-top: 10px" v-bind:upstreamId="upstream.id"
@@ -95,9 +97,9 @@
         <Divider/>
         <div id="plugins">
             <Row>
-                <Col span="12"><h1>Plugins:</h1></Col>
+                <Col span="12"><h1>Plugins</h1></Col>
                 <Col span="12" style="text-align:right;position: absolute;top: 50%;right: 0px">
-                    <Button type="primary" size="small" @click="addPlugin()">{{$t('breadcrumb.addPlugin')}}</Button>
+                    <b-button variant="primary" size="sm" @click="addPlugin()">{{$t('breadcrumb.addPlugin')}}</b-button>
                 </Col>
             </Row>
             <PluginTable v-bind:plugins="plugins"></PluginTable>
@@ -149,7 +151,7 @@
             });
             EventBus.$on('pluginChange',({pluginId}) => {
                 for(let plugin of this.plugins) {
-                    if(plugin.id===pluginId) {
+                    if (plugin.id===pluginId) {
                         this.loadPlugins();
                         break;
                     }
@@ -202,7 +204,7 @@
                         highlightCode();
                     })
                 }, error => {
-                    if(error.response.status===404||error.response.status===400) {
+                    if (error.response.status===404||error.response.status===400) {
                         //upstream not existed
                         this.upstreamExisted=false;
                     }
@@ -240,7 +242,7 @@
             editUpstream() {
                 this.$router.push({path: `/upstreams/edit/${this.upstream.id}`});
             },
-            addPlugin(){
+            addPlugin() {
                 this.$router.push({path: `/plugins/add/service/${this.service.id}`});
             }
 

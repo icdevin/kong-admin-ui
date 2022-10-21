@@ -1,11 +1,11 @@
 <template>
     <div>
-        <Breadcrumb>
-            <BreadcrumbItem to="/">{{$t('breadcrumb.home')}}</BreadcrumbItem>
-            <BreadcrumbItem to="/route">Route</BreadcrumbItem>
-            <BreadcrumbItem v-if="!edit">{{$t('breadcrumb.addRoute')}}</BreadcrumbItem>
-            <BreadcrumbItem v-else>{{routeId}}</BreadcrumbItem>
-        </Breadcrumb>
+        <b-breadcrumb>
+            <b-breadcrumb-item href="#/">Home</b-breadcrumb-item>
+            <b-breadcrumb-item href="#/routes">Route</b-breadcrumb-item>
+            <b-breadcrumb-item v-if="!edit">{{$t('breadcrumb.addRoute')}}</b-breadcrumb-item>
+            <b-breadcrumb-item v-else>{{routeId}}</b-breadcrumb-item>
+        </b-breadcrumb>
 
         <Form :model="formItem" :label-width="150" style="margin-top: 20px">
             <FormItem label="name:">
@@ -64,12 +64,6 @@
                 <div class="field_desc">{{$t('route.fieldHttpsRedirectStatusCode')}}</div>
             </FormItem>
 
-            <!--<FormItem label="strip_path">-->
-            <!--<RadioGroup v-model="formItem.strip_path">-->
-            <!--<Radio label="true">true</Radio>-->
-            <!--<Radio label="false">false</Radio>-->
-            <!--</RadioGroup>-->
-            <!--</FormItem>-->
             <FormItem label="strip_path:">
                 <i-switch v-model="formItem.strip_path" size="large">
                     <span slot="open">true</span>
@@ -102,12 +96,12 @@
                         <Input type="number" v-model.number="item.port" placeholder="1234" />
                     </Col>
                     <Col span="4" offset="1">
-                        <Button @click="formItem.sources.splice(index,1)">Delete</Button>
+                        <b-button variant="outline-danger" @click="formItem.sources.splice(index,1)">Delete</b-button>
                     </Col>
                 </Row>
                 <Row>
                     <Col span="6">
-                        <Button type="dashed" long @click="addSource" icon="md-add">Add item</Button>
+                        <b-button variant="outline-secondary" block @click="addSource" icon="md-add">Add item</b-button>
                     </Col>
                 </Row>
                 <span class="field_desc">{{$t('route.fieldSources')}} </span>
@@ -122,40 +116,16 @@
                         <Input type="number" v-model.number="item.port" placeholder="1234" />
                     </Col>
                     <Col span="4" offset="1">
-                        <Button @click="formItem.destinations.splice(index,1)">Delete</Button>
+                        <b-button variant="outline-danger" @click="formItem.destinations.splice(index,1)">Delete</b-button>
                     </Col>
                 </Row>
                 <Row>
                     <Col span="6">
-                        <Button type="dashed" long @click="addDestination" icon="md-add">Add item</Button>
+                        <b-button variant="outline-secondary" block @click="addDestination" icon="md-add">Add item</b-button>
                     </Col>
                 </Row>
                 <span class="field_desc">{{$t('route.fieldDestinations')}}</span>
             </FormItem>
-
-            <!--            <FormItem-->
-            <!--                    v-for="(item, index) in formItem.destinations"-->
-            <!--                    v-if="item.status"-->
-            <!--                    :key="index"-->
-            <!--                    :label="'Item ' + item.index"-->
-            <!--                    :prop="'items.' + index + '.value'"-->
-            <!--                    :rules="{required: true, message: 'Item ' + item.index +' can not be empty', trigger: 'blur'}">-->
-            <!--                <Row>-->
-            <!--                    <Col span="18">-->
-            <!--                        <Input type="text" v-model="item.value" placeholder="Enter something..."></Input>-->
-            <!--                    </Col>-->
-            <!--                    <Col span="4" offset="1">-->
-            <!--                        <Button @click="handleRemove(index)">Delete</Button>-->
-            <!--                    </Col>-->
-            <!--                </Row>-->
-            <!--            </FormItem>-->
-            <!--            <FormItem>-->
-            <!--                <Row>-->
-            <!--                    <Col span="12">-->
-            <!--                        <Button type="dashed" long @click="handleAdd" icon="md-add">Add item</Button>-->
-            <!--                    </Col>-->
-            <!--                </Row>-->
-            <!--            </FormItem>-->
 
             <FormItem label="service:">
                 <Select v-model="formItem.service.id" style="width:400px" :disabled="!serviceIdCanChanged">
@@ -166,7 +136,7 @@
             </FormItem>
 
             <FormItem>
-                <Button type="primary" @click="saveRoute">{{$t('common.save')}}</Button>
+                <b-button variant="primary" @click="saveRoute">{{$t('common.save')}}</b-button>
             </FormItem>
         </Form>
     </div>
@@ -227,32 +197,32 @@
                 if (this.formItem.url) {
                     param.url = this.formItem.url;
                 }
-                if(this.formItem.sources!=null&&this.formItem.sources.length>0) {
+                if (this.formItem.sources!=null&&this.formItem.sources.length>0) {
                     param.sources=this.formItem.sources;
                 }else{
                     param.sources=null;
                 }
-                if(this.formItem.destinations!=null&&this.formItem.destinations.length>0) {
+                if (this.formItem.destinations!=null&&this.formItem.destinations.length>0) {
                     param.destinations=this.formItem.destinations;
                 }else{
                     param.destinations=null;
                 }
-                if(this.formItem.protocols!=null&&this.formItem.protocols.length>0) {
+                if (this.formItem.protocols!=null&&this.formItem.protocols.length>0) {
                     param.protocols=this.formItem.protocols;
                 }else{
                     param.protocols=null;
                 }
-                if(this.formItem.hosts!=null&&this.formItem.hosts.length>0) {
+                if (this.formItem.hosts!=null&&this.formItem.hosts.length>0) {
                     param.hosts=this.formItem.hosts;
                 }else{
                     param.hosts=null;
                 }
-                if(this.formItem.methods!=null&&this.formItem.methods.length>0) {
+                if (this.formItem.methods!=null&&this.formItem.methods.length>0) {
                     param.methods=this.formItem.methods;
                 }else{
                     param.methods=null;
                 }
-                if(this.formItem.paths!=null&&this.formItem.paths.length>0) {
+                if (this.formItem.paths!=null&&this.formItem.paths.length>0) {
                     param.paths=this.formItem.paths;
                 }else{
                     param.paths=null;
@@ -268,7 +238,7 @@
                 param.strip_path=this.formItem.strip_path;
                 param.preserve_host=this.formItem.preserve_host;
 
-                if(this.formItem.snis!=null&&this.formItem.snis.length>0) {
+                if (this.formItem.snis!=null&&this.formItem.snis.length>0) {
                     param.snis=this.formItem.snis;
                 }else{
                     param.snis=null;
@@ -290,7 +260,7 @@
                 let _this = this;
                 this._get('/routes/' + this.routeId, response => {
                     let data=response.data;
-                    if(data.methods===null) {
+                    if (data.methods===null) {
                         data.methods=[];
                     }
                     _this.formItem = data;
@@ -305,13 +275,13 @@
                 });
             },
             addDestination() {
-                if(this.formItem.destinations==null) {
+                if (this.formItem.destinations==null) {
                     this.formItem.destinations=[];
                 }
                 this.formItem.destinations.push({ip:'',port:''});
             },
             addSource() {
-                if(this.formItem.sources==null) {
+                if (this.formItem.sources==null) {
                     this.formItem.sources=[];
                 }
                 this.formItem.sources.push({ip:'',port:''});
@@ -344,7 +314,7 @@
             },
             headers: {
                 set: function (newValue) {
-                    if(newValue){
+                    if (newValue) {
                         this.formItem.headers = JSON.parse(newValue);
                     }else{
                         this.formItem.headers = null;

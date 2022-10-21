@@ -1,19 +1,16 @@
 <template>
     <div id="config">
-        <Row style="margin-bottom: 10px">
-            <Col span="12"><h1>JWT credentials</h1></Col>
-            <Col span="12" style="text-align:right;position: absolute;top: 50%;right: 0px">
-                <Button type="primary" size="small" @click="showModal=true">Create a Credential</Button>
-            </Col>
-        </Row>
-
+        <div class="header">
+            <h2>JWT Credentials</h2>
+            <b-button variant="primary" size="sm" @click="showModal=true">Create a Credential</b-button>
+        </div>
 
         <Table border :columns="columns" :data="configList">
             <template slot-scope="{ row }" slot="name">
                 <strong>{{ row.name }}</strong>
             </template>
             <template slot-scope="{ row }" slot="action">
-                <Button type="error" size="small" @click="deleteDialog(row.id)">Delete</Button>
+                <b-button variant="danger" size="sm" @click="deleteDialog(row.id)">Delete</b-button>
             </template>
         </Table>
 
@@ -99,11 +96,11 @@
                 algorithms:['HS256','HS384','HS512','RS256','ES256']
             }
         },
-        mounted(){
+        mounted() {
             this.loadCredential();
         },
         methods: {
-            loadCredential(){
+            loadCredential() {
                 this._get('/consumers/'+this.consumerId+'/jwt',response=>{
                     this.configList=response.data.data;
                     this.configList.map(function (config) {
@@ -114,16 +111,16 @@
                 });
             },
             addCredential() {
-                if(!this.formItem.rsa_public_key){
+                if (!this.formItem.rsa_public_key) {
                     this.formItem.rsa_public_key=null;
                 }
-                if(!this.formItem.secret){
+                if (!this.formItem.secret) {
                     this.formItem.secret=null;
                 }
-                if(!this.formItem.key){
+                if (!this.formItem.key) {
                     this.formItem.key=null;
                 }
-                if(!this.formItem.algorithm){
+                if (!this.formItem.algorithm) {
                     this.formItem.algorithm=null;
                 }
                 this._post('/consumers/'+this.consumerId+'/jwt',this.formItem,()=>{
@@ -158,5 +155,12 @@
 <style scoped>
     #config {
         margin-top: 10px;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 20px 0 10px 0;
     }
 </style>

@@ -1,13 +1,14 @@
 <template>
   <Row>
     <Col span="3">
-      <div id="title">Kong Admin UI</div>
+      <div class="title">
+        <router-link to="/"> Kong Admin UI </router-link>
+      </div>
     </Col>
     <Col span="21" class="config">
       <div>
-        <p>
-          <router-link to="/config">{{ address }}</router-link>&nbsp;&nbsp;&nbsp;&nbsp;<a @click="changeLanguage">{{ language }}</a>
-        </p>
+        <router-link to="/config">{{ address }}</router-link> |
+        <a @click="changeLanguage">{{ language }}</a>
       </div>
     </Col>
   </Row>
@@ -15,15 +16,15 @@
 
 <script>
 export default {
-  name: 'Header',
+  name: "Header",
   data() {
     return {
-      address: '',
+      address: "",
     };
   },
   computed: {
     language() {
-      return this.$i18n.locale === 'zh' ? 'English' : 'Chinese';
+      return this.$i18n.locale === "zh" ? "English" : "中文";
     },
   },
   mounted() {
@@ -31,9 +32,9 @@ export default {
   },
   methods: {
     changeLanguage() {
-      this.$i18n.locale === 'zh'
-        ? (this.$i18n.locale = 'en')
-        : (this.$i18n.locale = 'zh');
+      this.$i18n.locale === "zh"
+        ? (this.$i18n.locale = "en")
+        : (this.$i18n.locale = "zh");
       localStorage.language = this.$i18n.locale;
     },
   },
@@ -41,24 +42,17 @@ export default {
 </script>
 
 <style scoped>
-#title {
+.title a {
   color: white;
   font-size: 1.4rem;
 }
 .config {
+  display: flex;
+  justify-content: flex-end;
   color: white;
-  height: 64px;
-}
-.config div {
-  position: absolute;
-  top: 30px;
-  right: 0;
-  padding-right: 20px;
-}
-.config p {
-  line-height: normal;
 }
 .config a {
   color: white;
+  font-size: 14px;
 }
 </style>

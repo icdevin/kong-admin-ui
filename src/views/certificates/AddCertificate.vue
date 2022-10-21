@@ -1,11 +1,11 @@
 <template>
     <div>
-        <Breadcrumb>
-            <BreadcrumbItem to="/">{{$t('breadcrumb.home')}}</BreadcrumbItem>
-            <BreadcrumbItem to="/certificates">Certificate</BreadcrumbItem>
-            <BreadcrumbItem v-if="!edit">{{$t('breadcrumb.add_certificate')}}</BreadcrumbItem>
-            <BreadcrumbItem v-else>{{certificateId}}</BreadcrumbItem>
-        </Breadcrumb>
+        <b-breadcrumb>
+            <b-breadcrumb-item href="#/">{{$t('breadcrumb.home')}}</b-breadcrumb-item>
+            <b-breadcrumb-item href="#/certificates">Certificate</b-breadcrumb-item>
+            <b-breadcrumb-item v-if="!edit">{{$t('breadcrumb.add_certificate')}}</b-breadcrumb-item>
+            <b-breadcrumb-item v-else>{{certificateId}}</b-breadcrumb-item>
+        </b-breadcrumb>
 
         <Form :model="formItem" :label-width="120" style="margin-top: 20px">
             <FormItem label="cert:">
@@ -28,7 +28,7 @@
             </FormItem>
 
             <FormItem>
-                <Button type="primary" @click="saveCertificates">{{$t('common.save')}}</Button>
+                <b-button variant="primary" @click="saveCertificates">{{$t('common.save')}}</b-button>
             </FormItem>
         </Form>
     </div>
@@ -82,11 +82,11 @@
                 let _this = this;
                 this._get('/certificates/' + this.certificateId, response => {
                     _this.formItem = response.data;
-                    if( this.formItem.snis==null) {
+                    if ( this.formItem.snis==null) {
                         this.formItem.snis=[];
                     }
                     this.snis_str = this.formItem.snis.join(',');
-                    if( this.formItem.tags==null) {
+                    if ( this.formItem.tags==null) {
                         this.formItem.tags=[];
                     }
                     this.tags_str = this.formItem.tags.join(',');
@@ -95,14 +95,14 @@
         },
         computed:{
             snis_str:{
-                get(){
-                    if(this.formItem.snis.length>0){
+                get() {
+                    if (this.formItem.snis.length>0) {
                         return this.formItem.snis.join(',');
                     }
                     return '';
                 },
-                set(newValue){
-                    if(newValue){
+                set(newValue) {
+                    if (newValue) {
                         this.formItem.snis=newValue.split(',');
                     }else{
                         this.formItem.snis=[];
@@ -111,14 +111,14 @@
                 }
             },
             tags_str:{
-                get(){
-                    if(this.formItem.tags.length>0){
+                get() {
+                    if (this.formItem.tags.length>0) {
                         return this.formItem.tags.join(',');
                     }
                     return '';
                 },
-                set(newValue){
-                    if(newValue){
+                set(newValue) {
+                    if (newValue) {
                         this.formItem.tags=newValue.split(',');
                     }else{
                         this.formItem.tags=[];

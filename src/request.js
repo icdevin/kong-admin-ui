@@ -1,10 +1,10 @@
 import axios from 'axios';
 export default {
-    install: function(Vue,) {
+    install: function(Vue) {
         Vue.prototype._post= function (path,data,callback) {
             let _this=this;
             let checkResult = checkAddress(_this);
-            if(!checkResult) {
+            if (!checkResult) {
                 return;
             }
             let address=localStorage.address;
@@ -21,7 +21,7 @@ export default {
         Vue.prototype._get= function (path,callback,errorCallback) {
             let _this=this;
             let checkResult = checkAddress(_this);
-            if(!checkResult) {
+            if (!checkResult) {
                 return;
             }
             let address=localStorage.address;
@@ -31,7 +31,7 @@ export default {
                     callback(response);
                 })
                 .catch(function (error) {
-                    if(errorCallback!=null) {
+                    if (errorCallback!=null) {
                         errorCallback(error)
                     }else{
                         errorHandler(error,_this);
@@ -41,7 +41,7 @@ export default {
         Vue.prototype._delete = function (path,callback,errorCallback) {
             let _this=this;
             let checkResult = checkAddress(_this);
-            if(!checkResult) {
+            if (!checkResult) {
                 return;
             }
             let address=localStorage.address;
@@ -50,7 +50,7 @@ export default {
                     callback(response);
                 })
                 .catch(function (error) {
-                    if(errorCallback!=null) {
+                    if (errorCallback!=null) {
                         errorCallback(error)
                     }else{
                         errorHandler(error,_this);
@@ -61,7 +61,7 @@ export default {
         Vue.prototype._patch = function (path, data, callback) {
             let _this=this;
             let checkResult = checkAddress(_this);
-            if(!checkResult) {
+            if (!checkResult) {
                 return;
             }
             let address=localStorage.address;
@@ -76,14 +76,14 @@ export default {
         };
         function checkAddress(_this) {
             let address=localStorage.address;
-            if(address==null) {
+            if (address==null) {
                 _this.$router.push('/config');
                 return false;
             }
             return true;
         }
         function errorHandler(error,_this) {
-            if(error.response&&error.response.status!==404) {
+            if (error.response&&error.response.status!==404) {
                 _this.$Message.error({content: error.response.data.message, duration: 5});
             }else{
                 console.log(error);
@@ -94,11 +94,11 @@ export default {
 
         function getConfig() {
             let config={};
-            if(localStorage.headers==='null') {
+            if (localStorage.headers==='null') {
                 localStorage.removeItem('headers');
                 return config;
             }
-            if(localStorage.headers) {
+            if (localStorage.headers) {
                 try{
                     config.headers=JSON.parse(localStorage.headers);
                 }catch (e) {

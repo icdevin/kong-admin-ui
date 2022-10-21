@@ -1,16 +1,13 @@
 <template>
     <div id="content">
-        <Breadcrumb>
-            <BreadcrumbItem to="/">Home</BreadcrumbItem>
-            <BreadcrumbItem to="/upstream">Upstream</BreadcrumbItem>
-        </Breadcrumb>
-        <Row>
-            <Col span="12"> <h1>Upstream List:</h1></Col>
-            <Col span="12" style="text-align:right;position: absolute;top: 30%;right: 0px">
-                <Button type="primary" size="small" @click="addUpstream">Add Upstream</Button>
-            </Col>
-        </Row>
-        <!--<UpstreamTable v-bind:upstreams="upstreams"></UpstreamTable>-->
+        <b-breadcrumb>
+            <b-breadcrumb-item href="#/">Home</b-breadcrumb-item>
+            <b-breadcrumb-item href="#/upstream">Upstream</b-breadcrumb-item>
+        </b-breadcrumb>
+        <div class="header">
+            <h1>Upstream List</h1>
+            <b-button variant="primary" size="sm" @click="addUpstream">Add Upstream</b-button>
+        </div>
 
         <div id="table">
             <Table border :columns="columns" :data="upstreams" :loading="loading">
@@ -18,8 +15,8 @@
                     <strong>{{ row.name }}</strong>
                 </template>
                 <template slot-scope="{ row }" slot="action">
-                    <Button type="primary" size="small" style="margin-right: 5px" @click="edit(row.id)">{{$t('common.view')}}</Button>
-                    <Button type="error" size="small" @click="deleteDialog(row.id)">{{$t('common.delete')}}</Button>
+                    <b-button variant="primary" size="sm" style="margin-right: 5px" @click="edit(row.id)">{{$t('common.edit')}}</b-button>
+                    <b-button variant="danger" size="sm" @click="deleteDialog(row.id)">{{$t('common.delete')}}</b-button>
                 </template>
             </Table>
         </div>
@@ -41,7 +38,7 @@
     import EventBus from '@/event-bus'
     export default {
         name: "UpstreamList",
-        data (){
+        data () {
             return {
                 upstreams:[],
                 loading: true,
@@ -53,7 +50,6 @@
                     {
                         title: 'name',
                         key: 'name',
-                        width:100
                     },
                     {
                         title: 'created_at',
@@ -63,18 +59,14 @@
                     {
                         title: 'hash_on',
                         key: 'hash_on',
-                        width:140
                     },
                     {
                         title: 'hash_on_cookie_path',
                         key: 'hash_on_cookie_path',
-                        width:140
-
                     },
                     {
                         title: 'Action',
                         slot: 'action',
-                        width: 150,
                         align: 'center'
                     }
                 ],
@@ -150,6 +142,13 @@
 </script>
 
 <style scoped>
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 10px 0;
+    }
+
     .page {
         text-align: right;
         margin-top: 10px;

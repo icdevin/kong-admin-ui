@@ -1,18 +1,13 @@
 <template>
   <div id="content">
-    <Breadcrumb>
-      <BreadcrumbItem to="/">Home</BreadcrumbItem>
-      <BreadcrumbItem to="/routes">Route</BreadcrumbItem>
-    </Breadcrumb>
-    <Row>
-      <Col span="12"> <h1>Route List</h1></Col>
-      <Col
-        span="12"
-        style="text-align: right; position: absolute; top: 30%; right: 0px"
-      >
-        <Button type="primary" size="small" @click="addRoute">Add Route</Button>
-      </Col>
-    </Row>
+    <b-breadcrumb>
+      <b-breadcrumb-item href="#/">Home</b-breadcrumb-item>
+      <b-breadcrumb-item href="#/routes">Route</b-breadcrumb-item>
+    </b-breadcrumb>
+    <div class="header">
+      <h1>{{$t('breadcrumb.route_list')}}</h1>
+      <b-button variant="primary" size="sm" @click="addRoute">Add Route</b-button>
+    </div>
     <RouteTable v-bind:routes="routes"></RouteTable>
     <div class="page">
       <ButtonGroup>
@@ -97,10 +92,12 @@ export default {
 };
 </script>
 
-
 <style scoped>
-#table {
-  margin-top: 10px;
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
 }
 
 .page {

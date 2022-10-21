@@ -1,11 +1,11 @@
 <template>
     <div>
-        <Breadcrumb>
-            <BreadcrumbItem to="/">Home</BreadcrumbItem>
-            <BreadcrumbItem to="/consumers">Consumer</BreadcrumbItem>
-            <BreadcrumbItem v-if="!consumerId">Add Consumer</BreadcrumbItem>
-            <BreadcrumbItem v-else>{{consumerId}}</BreadcrumbItem>
-        </Breadcrumb>
+        <b-breadcrumb>
+            <b-breadcrumb-item href="#/">Home</b-breadcrumb-item>
+            <b-breadcrumb-item href="#/consumers">Consumer</b-breadcrumb-item>
+            <b-breadcrumb-item v-if="!consumerId">Add Consumer</b-breadcrumb-item>
+            <b-breadcrumb-item v-else>{{consumerId}}</b-breadcrumb-item>
+        </b-breadcrumb>
 
         <Form :model="formItem" :label-width="120" style="margin-top: 20px">
             <FormItem label="username:">
@@ -17,17 +17,15 @@
                 <span class="field_desc">Field for storing an existing unique ID for the consumer - useful for mapping Kong with users in your existing database. You must send either this field or username with the request.</span>
             </FormItem>
             <FormItem>
-                <Button type="primary" @click="saveConsumer">Save</Button>
+                <b-button variant="primary" @click="saveConsumer">Save</b-button>
             </FormItem>
         </Form>
 
         <div id="plugins" v-if="consumerId">
-            <Row style="margin-bottom: 10px">
-                <Col span="12"><h1>Plugins:</h1></Col>
-                <Col span="12" style="text-align:right;position: absolute;top: 50%;right: 0px">
-                    <Button type="primary" size="small" @click="addPlugin()">Add plugin</Button>
-                </Col>
-            </Row>
+            <div class="header" style="margin-bottom: 10px">
+                <h2>Plugins</h2>
+                <b-button variant="primary" size="sm" @click="addPlugin()">Add Plugin</b-button>
+            </div>
             <PluginTable v-bind:plugins="plugins"></PluginTable>
         </div>
 
@@ -68,16 +66,16 @@
                 configHmacAuth:[]
             }
         },
-        mounted(){
+        mounted() {
             this.consumerId = this.$route.params.id;
-            if(this.consumerId) {
+            if (this.consumerId) {
                 this.loadConsumer();
                 this.loadPlugins();
             }
 
             EventBus.$on('pluginChange',({pluginId}) => {
                 for(let plugin of this.plugins) {
-                    if(plugin.id===pluginId) {
+                    if (plugin.id===pluginId) {
                         this.loadPlugins();
                         break;
                     }
@@ -111,7 +109,7 @@
                     this.formItem=response.data;
                 });
             },
-            loadPlugins(){
+            loadPlugins() {
                 this._get('/consumers/' + this.consumerId +'/plugins', response => {
                     this.plugins = response.data.data;
                     this.plugins.map(function (plugin) {
@@ -121,7 +119,7 @@
                 });
 
             },
-            addPlugin(){
+            addPlugin() {
                 this.$router.push({path: `/plugins/add/consumer/${this.consumerId}`});
             }
         },
@@ -132,6 +130,13 @@
 </script>
 
 <style scoped>
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 10px 0;
+    }
+
     .field_desc {
         margin-left: 10px;
     }

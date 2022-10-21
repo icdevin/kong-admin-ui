@@ -6,7 +6,7 @@
                     <strong>{{ row.name }}</strong>
                 </template>
                 <template slot-scope="{ row }" slot="action">
-                    <Button type="error" size="small" @click="deleteDialog(row.id)">{{$t('common.delete')}}</Button>
+                    <b-button variant="danger" size="sm" @click="deleteDialog(row.id)">{{$t('common.delete')}}</b-button>
                 </template>
             </Table>
         </div>
@@ -70,7 +70,7 @@
                         key: 'health',
                         width: 200,
                         render:function (h, params) {
-                            if(params.row.health==='HEALTHY'){
+                            if (params.row.health==='HEALTHY') {
                                 return h('div',[
                                     h('Icon',{
                                         props: {
@@ -169,7 +169,7 @@
                     }
                 });
             },
-            cancelAddModalDialog(){
+            cancelAddModalDialog() {
                 this.target.target='';
                 this.target.weight=2;
 

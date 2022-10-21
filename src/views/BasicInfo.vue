@@ -1,40 +1,30 @@
 <template>
     <div>
-        <Breadcrumb>
-            <BreadcrumbItem to="/">{{$t('breadcrumb.home')}}</BreadcrumbItem>
-        </Breadcrumb>
+        <b-breadcrumb>
+            <b-breadcrumb-item href="#/">{{$t('breadcrumb.home')}}</b-breadcrumb-item>
+        </b-breadcrumb>
         <h1>{{$t('breadcrumb.info')}}</h1>
-        <Row>
-            <Col span="6">hostname: {{basicInfo.hostname}}</Col>
-            <Col span="6">version: {{basicInfo.version}}</Col>
-            <Col span="6">node_id {{basicInfo.node_id}}</Col>
-            <Col span="6">tagline: {{basicInfo.tagline}}</Col>
-        </Row>
-        <h3>{{$t('basicInfo.configuration')}}:</h3>
-        <Row>
-            <Col span="8">prefix: {{ basicInfo.configuration.prefix }}</Col>
-            <Col span="8">proxy_listen: {{basicInfo.configuration.proxy_listen}}</Col>
-            <Col span="8">db_update_frequency: {{basicInfo.configuration.db_update_frequency}}</Col>
-        </Row>
-        <Row>
-            <Col span="8">admin_listen: {{basicInfo.configuration.admin_listen}}</Col>
-            <Col span="8">nginx_conf: {{basicInfo.configuration.nginx_conf}}</Col>
-            <Col span="8">nginx_pid: {{basicInfo.configuration.nginx_pid}}</Col>
-        </Row>
-        <h3>{{$t('basicInfo.status')}}:</h3>
-        <Row>
-            <Col span="8">server.connections_writing: {{ status.server.connections_writing }}</Col>
-            <Col span="8">server.total_requests: {{ status.server.total_requests }}</Col>
-            <Col span="8">server.connections_handled: {{ status.server.connections_handled }}</Col>
-        </Row>
-        <Row>
-            <Col span="8">server.connections_accepted: {{ status.server.connections_accepted }}</Col>
-            <Col span="8">server.connections_reading: {{ status.server.connections_reading }}</Col>
-            <Col span="8">server.connections_active: {{ status.server.connections_active }}</Col>
-        </Row>
-        <Row>
-            <Col span="8">server.connections_waiting: {{ status.server.connections_waiting }}</Col>
-        </Row>
+        <p>Hostname: {{basicInfo.hostname}}</p>
+        <p>Version: {{basicInfo.version}}</p>
+        <p>Node ID {{basicInfo.node_id}}</p>
+        <p>Tagline: {{basicInfo.tagline}}</p>
+
+        <h3>{{$t('basicInfo.configuration')}}</h3>
+        <p>Prefix: {{ basicInfo.configuration.prefix }}</p>
+        <p>Proxy Listen: {{basicInfo.configuration.proxy_listen}}</p>
+        <p>DB Update Frequency: {{basicInfo.configuration.db_update_frequency}}</p>
+        <p>Admin Listen: {{basicInfo.configuration.admin_listen}}</p>
+        <p>Nginx conf: {{basicInfo.configuration.nginx_conf}}</p>
+        <p>Nginx PID: {{basicInfo.configuration.nginx_pid}}</p>
+
+        <h3>{{$t('basicInfo.status')}}</h3>
+        <p>server.connections_writing: {{ status.server.connections_writing }}</p>
+        <p>server.total_requests: {{ status.server.total_requests }}</p>
+        <p>server.connections_handled: {{ status.server.connections_handled }}</p>
+        <p>server.connections_accepted: {{ status.server.connections_accepted }}</p>
+        <p>server.connections_reading: {{ status.server.connections_reading }}</p>
+        <p>server.connections_active: {{ status.server.connections_active }}</p>
+        <p>server.connections_waiting: {{ status.server.connections_waiting }}</p>
     </div>
 </template>
 
@@ -89,7 +79,11 @@
         margin-left: 20px;
     }
 
-    Col {
-        padding: 50px;
+    p {
+        margin-bottom: 0;
+    }
+
+    h3 {
+        margin-top: 10px;
     }
 </style>

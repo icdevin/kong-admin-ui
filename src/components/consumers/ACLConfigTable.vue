@@ -1,19 +1,16 @@
 <template>
     <div id="config">
-        <Row style="margin-bottom: 10px">
-            <Col span="12"><h1>ACL Group:</h1></Col>
-            <Col span="12" style="text-align:right;position: absolute;top: 50%;right: 0px">
-                <Button type="primary" size="small" @click="showModal=true">Add Group</Button>
-            </Col>
-        </Row>
-
+        <div class="header">
+            <h2>ACL Group</h2>
+            <b-button variant="primary" size="sm" @click="showModal=true">Add Group</b-button>
+        </div>
 
         <Table border :columns="columns" :data="configList">
             <template slot-scope="{ row }" slot="name">
                 <strong>{{ row.name }}</strong>
             </template>
             <template slot-scope="{ row }" slot="action">
-                <Button type="error" size="small" @click="deleteDialog(row.id)">Delete</Button>
+                <b-button variant="danger" size="sm" @click="deleteDialog(row.id)">Delete</b-button>
             </template>
         </Table>
 
@@ -25,7 +22,6 @@
                 <FormItem label="username:">
                     <Input v-model="formItem.group"  placeholder="Enter group name ..." class="text_input"></Input>
                 </FormItem>
-
             </Form>
         </Modal>
 
@@ -64,11 +60,11 @@
                 showModal:false
             }
         },
-        mounted(){
+        mounted() {
             this.loadAclGroup();
         },
         methods: {
-            loadAclGroup(){
+            loadAclGroup() {
                 this._get('/consumers/'+this.consumerId+'/acls',response=>{
                     this.configList=response.data.data;
                     this.configList.map(function (config) {
@@ -107,5 +103,12 @@
 <style scoped>
     #config {
         margin-top: 10px;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 20px 0 10px 0;
     }
 </style>

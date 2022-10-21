@@ -1,15 +1,13 @@
 <template>
     <div id="content">
-        <Breadcrumb>
-            <BreadcrumbItem to="/">Home</BreadcrumbItem>
-            <BreadcrumbItem to="/consumers">Consumers</BreadcrumbItem>
-        </Breadcrumb>
-        <Row>
-            <Col span="12"> <h1>Consumer List:</h1></Col>
-            <Col span="12" style="text-align:right;position: absolute;top: 30%;right: 0px">
-                <Button type="primary" size="small" @click="addConsumer">Add Consumer</Button>
-            </Col>
-        </Row>
+        <b-breadcrumb>
+            <b-breadcrumb-item href="#/">Home</b-breadcrumb-item>
+            <b-breadcrumb-item href="#/consumers">Consumers</b-breadcrumb-item>
+        </b-breadcrumb>
+        <div class="header">
+            <h1>{{$t('breadcrumb.consumer_list')}}</h1>
+            <b-button variant="primary" size="sm" @click="addConsumer">Add Consumer</b-button>
+        </div>
         <ConsumerTable  v-bind:consumers="consumers"></ConsumerTable>
         <div class="page">
             <ButtonGroup>
@@ -27,7 +25,7 @@
     import ConsumerTable from '@/components/consumers/ConsumerTable'
     export default {
         name: "ConsumerList",
-        data (){
+        data () {
             return {
                 consumers:[],
                 offset:'',
@@ -43,7 +41,7 @@
 
             EventBus.$on('consumerChange',({consumerId}) => {
                 for(let consumer of this.consumers) {
-                    if(consumer.id===consumerId) {
+                    if (consumer.id===consumerId) {
                         this.loadConsumers();
                         break;
                     }
@@ -86,8 +84,11 @@
 
 
 <style scoped>
-    #table {
-        margin-top: 10px;
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 10px 0;
     }
 
     .page {

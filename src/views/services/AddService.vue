@@ -1,11 +1,11 @@
 <template>
     <div>
-        <Breadcrumb>
-            <BreadcrumbItem to="/">{{$t('breadcrumb.home')}}</BreadcrumbItem>
-            <BreadcrumbItem to="/services">Service</BreadcrumbItem>
-            <BreadcrumbItem v-if="!edit">{{$t('breadcrumb.addService')}}</BreadcrumbItem>
-            <BreadcrumbItem v-else>{{serviceId}}</BreadcrumbItem>
-        </Breadcrumb>
+        <b-breadcrumb>
+            <b-breadcrumb-item href="#/">{{$t('breadcrumb.home')}}</b-breadcrumb-item>
+            <b-breadcrumb-item href="#/services">Service</b-breadcrumb-item>
+            <b-breadcrumb-item v-if="!edit">{{$t('breadcrumb.addService')}}</b-breadcrumb-item>
+            <b-breadcrumb-item v-else>{{serviceId}}</b-breadcrumb-item>
+        </b-breadcrumb>
 
         <Form :model="formItem" :label-width="120" style="margin-top: 20px">
             <FormItem label="name:">
@@ -63,7 +63,7 @@
                 <span class="field_desc">{{$t('service.fieldUrl')}}</span>
             </FormItem>
             <FormItem>
-                <Button type="primary" @click="saveService">Save</Button>
+                <b-button variant="primary" @click="saveService">Save</b-button>
             </FormItem>
         </Form>
     </div>
@@ -96,7 +96,7 @@
             this.serviceId=this.$route.params.id;
             this.edit=this.serviceId!=null;
             this.loadUpstreams();
-            if(this.edit) {
+            if (this.edit) {
                 this.loadService();
             }
         },
@@ -112,7 +112,7 @@
                 });
             },
             filterMethod (value, option) {
-                if(value){
+                if (value) {
                     return option.toUpperCase().indexOf(value.toUpperCase()) !== -1;
                 }
                 return true;
@@ -133,7 +133,7 @@
                 if (formData.url==='') {
                     delete formData.url;
                 }
-                if(!this.edit){
+                if (!this.edit) {
                     this._post('/services/',formData,()=>{
                         _this.$router.push('/services');
                     });

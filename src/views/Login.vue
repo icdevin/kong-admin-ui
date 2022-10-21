@@ -17,7 +17,7 @@
                         </Input>
                     </FormItem>
                     <FormItem>
-                        <Button type="primary" @click="handleSubmit('formInline')">Signin</Button>
+                        <b-button variant="primary" @click="handleSubmit('formInline')">Sign In</b-button>
                     </FormItem>
                 </Form>
             </Card>

@@ -1,40 +1,21 @@
 <template>
   <div id="content">
-    <Breadcrumb>
-      <BreadcrumbItem to="/">{{ $t("breadcrumb.home") }}</BreadcrumbItem>
-      <BreadcrumbItem to="/services">{{
-        $t("breadcrumb.service_list")
-      }}</BreadcrumbItem>
-    </Breadcrumb>
-    <Row>
-      <Col span="12">
-        <h1>{{ $t("breadcrumb.service_list") }}</h1></Col
-      >
-      <Col
-        span="12"
-        style="text-align: right; position: absolute; top: 30%; right: 0px"
-      >
-        <Button type="primary" size="small" @click="addService">{{
-          $t("breadcrumb.addService")
-        }}</Button>
-      </Col>
-    </Row>
+    <b-breadcrumb>
+      <b-breadcrumb-item href="#/">{{ $t("breadcrumb.home") }}</b-breadcrumb-item>
+      <b-breadcrumb-item href="#/services">{{$t("breadcrumb.service_list")}}</b-breadcrumb-item>
+    </b-breadcrumb>
+    <div class="header">
+      <h1>{{ $t("breadcrumb.service_list") }}</h1>
+      <b-button variant="primary" size="sm" @click="addService">{{$t("breadcrumb.addService")}}</b-button>
+    </div>
     <div id="table">
       <Table border :columns="columns" :data="services" :loading="loading">
         <template slot-scope="{ row }" slot="name">
           <strong>{{ row.name }}</strong>
         </template>
         <template slot-scope="{ row }" slot="action">
-          <Button
-            type="primary"
-            size="small"
-            style="margin-right: 5px"
-            @click="show(row.id)"
-            >{{ $t("common.view") }}</Button
-          >
-          <Button type="error" size="small" @click="deleteDialog(row.id)">{{
-            $t("common.delete")
-          }}</Button>
+          <b-button variant="primary" size="sm" style="margin-right: 5px" @click="show(row.id)">{{$t("common.view")}}</b-button>
+          <b-button variant="danger" size="sm" @click="deleteDialog(row.id)">{{$t("common.delete")}}</b-button>
         </template>
       </Table>
       <div class="page">
@@ -44,13 +25,13 @@
             icon="ios-skip-backward"
             @click="previous"
             :disabled="offsetStack.length === 0"
-          ></Button>
+          />
           <Button
             type="primary"
             icon="ios-skip-forward"
             @click="next"
             :disabled="!offset"
-          ></Button>
+          />
         </ButtonGroup>
       </div>
     </div>
@@ -70,17 +51,14 @@ export default {
         {
           title: "id",
           key: "id",
-          width: 110,
         },
         {
           title: "name",
           slot: "name",
-          width: 100,
         },
         {
           title: "host",
           key: "host",
-          width: 110,
         },
         {
           title: "created_at",
@@ -185,8 +163,11 @@ export default {
 </script>
 
 <style scoped>
-#table {
-  margin-top: 10px;
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
 }
 
 .page {

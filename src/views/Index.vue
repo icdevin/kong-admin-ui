@@ -1,7 +1,7 @@
 <template>
   <div class="layout">
     <Layout>
-      <Header style="padding: 0px">
+      <Header>
         <HeaderComponent></HeaderComponent>
       </Header>
       <Layout>
@@ -45,6 +45,7 @@ export default {
   min-height: 100%;
 }
 .ivu-layout-header {
+  padding-left: 0;
   background-color: #21252E;
 }
 .router-content {

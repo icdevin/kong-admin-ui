@@ -6,8 +6,8 @@
                     <strong>{{ row.name }}</strong>
                 </template>
                 <template slot-scope="{ row }" slot="action">
-                    <Button type="primary" size="small" style="margin-right: 5px" @click="edit(row.id)">View</Button>
-                    <Button type="error" size="small" @click="deleteDialog(row.id)">Delete</Button>
+                    <b-button variant="primary" size="sm" style="margin-right: 5px" @click="edit(row.id)">Edit</b-button>
+                    <b-button variant="danger" size="sm" @click="deleteDialog(row.id)">Delete</b-button>
                 </template>
             </Table>
         </div>

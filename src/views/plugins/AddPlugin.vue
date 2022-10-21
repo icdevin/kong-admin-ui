@@ -1,26 +1,27 @@
 <template>
   <div>
-    <Breadcrumb>
-      <BreadcrumbItem to="/">Home</BreadcrumbItem>
-      <BreadcrumbItem to="/plugins">Plugin</BreadcrumbItem>
-      <BreadcrumbItem v-if="!pluginId">Add Plugin</BreadcrumbItem>
-      <BreadcrumbItem v-else>{{ pluginId }}</BreadcrumbItem>
-    </Breadcrumb>
+    <b-breadcrumb>
+      <b-breadcrumb-item href="#/">Home</b-breadcrumb-item>
+      <b-breadcrumb-item href="#/plugins">Plugin</b-breadcrumb-item>
+      <b-breadcrumb-item v-if="!pluginId">Add Plugin</b-breadcrumb-item>
+      <b-breadcrumb-item v-else>{{ pluginId }}</b-breadcrumb-item>
+    </b-breadcrumb>
 
     <Form :model="formItem" :label-width="140" style="margin-top: 20px">
       <FormItem label="name:">
         <Select v-model="formItem.name" filterable class="text_input">
           <Option v-for="item in enabledPlugins" :value="item" :key="item">{{ item }}</Option>
         </Select>
-        <span class="field_desc"><a href="https://docs.konghq.com/hub/"
-                                    target="_blank">Plugin's document</a></span>
+        <span class="field_desc">
+          <a href="https://docs.konghq.com/hub/" target="_blank">Plugin Documentation</a>
+        </span>
       </FormItem>
 
       <FormItem label="service:">
         <Select v-model="serviceId" filterable class="text_input_multiple" ref="service" clearable>
           <Option v-for="item in services" :value="item.id" :key="item.id">{{ item.id + ' ' + item.name }}</Option>
         </Select>
-        <span class="field_desc">If this plugin no need assign to a service,leave it blank.</span>
+        <span class="field_desc">If this plugin doesn't need to be assigned to a service, leave it blank.</span>
       </FormItem>
 
       <FormItem label="route:">
@@ -28,9 +29,8 @@
           <Option v-for="item in routes" :value="item.id" :key="item.id">{{ item.id }}
           </Option>
         </Select>
-        <span class="field_desc">If this plugin no need assign to a route,leave it blank.</span>
+        <span class="field_desc">If this plugin doesn't need to be assigned to a route, leave it blank.</span>
       </FormItem>
-
 
       <FormItem label="consumer:">
         <Select v-model="formItem.consumer.id" filterable class="text_input_multiple" clearable>
@@ -38,7 +38,7 @@
             {{ item.id + ' ' + item.username + ' ' + item.custom_id }}
           </Option>
         </Select>
-        <span class="field_desc">If this plugin no need assign to a consumer,leave it blank.</span>
+        <span class="field_desc">If this plugin doesn't need to be assigned to a consumer, leave it blank.</span>
       </FormItem>
 
       <FormItem label="run_on:" v-if="!isKong2()">
@@ -47,8 +47,7 @@
             {{ item }}
           </Option>
         </Select>
-        <span
-            class="field_desc">Control on which Kong nodes this plugin will run, given a Service Mesh scenario. </span>
+        <span class="field_desc">Control on which Kong nodes this plugin will run, given a Service Mesh scenario.</span>
       </FormItem>
 
       <FormItem label="enable:">
@@ -59,20 +58,18 @@
         <span class="field_desc">Whether the plugin is applied.</span>
       </FormItem>
 
-
       <FormItem :label-width="300" v-for="field in flatFields" :label="field.fieldName+':'"
                 :key="field.fieldName">
-
         <Input v-if="field.fieldType==='string'" :name="field.fieldName" class="text_input"
                @input="valueChange($event,field)"
-               :value="field.defaultValue"></Input>
+               :value="field.defaultValue" />
         <Input v-if="field.fieldType==='array'&&field.elementType==='string'" :name="field.fieldName"
                @input="valueChange($event,field)" placeholder="Split by comma"
-               class="text_input" :value="field.defaultValue"></Input>
+               class="text_input" :value="field.defaultValue" />
 
         <Input v-if="field.fieldType==='set'&&field.elementType==='string'" :name="field.fieldName"
                @input="valueChange($event,field)" placeholder="Split by comma"
-               class="text_input" :value="field.defaultValue"></Input>
+               class="text_input" :value="field.defaultValue" />
         <InputNumber v-if="field.fieldType==='number'" :name="field.fieldName" class="text_input"
                      @input="valueChange($event,field)"
                      :value="field.defaultValue"></InputNumber>
@@ -87,9 +84,8 @@
         </i-switch>
       </FormItem>
 
-
       <FormItem>
-        <Button type="primary" @click="savePlugin">Save</Button>
+        <b-button variant="primary" @click="savePlugin">Save</b-button>
       </FormItem>
     </Form>
   </div>

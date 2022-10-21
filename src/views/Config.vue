@@ -12,8 +12,8 @@
                         <Input v-model="formItem.headers" placeholder='{"Authorization":"Basic YWRtaW46YWRtaW4="}'></Input>
                     </FormItem>
                 </Form>
-                <Button type="primary" @click="test">{{$t('config.button.enter')}}</Button>&nbsp;
-                <Button type="success" @click="clear">{{$t('config.button.clear')}}</Button>
+                <b-button variant="primary" @click="test">{{$t('config.button.enter')}}</b-button>&nbsp;
+                <b-button variant="success" @click="clear">{{$t('config.button.clear')}}</b-button>
             </Col>
             <Col span="6">&nbsp;</Col>
         </Row>
@@ -43,7 +43,7 @@
                         callback(new Error(this.$t('config.error.urlError')));
                         return;
                     }
-                    if(value.endsWith("/")) {
+                    if (value.endsWith("/")) {
                         callback(new Error(this.$t('config.error.urlEndWithSlash')));
                         this.formItem.address=this.formItem.address.substr(0,this.formItem.address.length-1)
                         return;
@@ -52,7 +52,7 @@
                 }
             };
             const headerValidator = (rule,value,callback) => {
-                if(!value) {
+                if (!value) {
                     callback();
                 } else {
                     try{
@@ -88,7 +88,7 @@
             saveConfig() {
                 console.log(this.formItem);
                 localStorage.address = this.formItem.address;
-                if(localStorage.headers!==this.formItem.headers){
+                if (localStorage.headers!==this.formItem.headers) {
                     localStorage.headers= this.formItem.headers;
                 }
                 this.$router.push('/');
@@ -99,7 +99,7 @@
                 this.$refs.form.validate((valid) => {
                     if (valid) {
                         let config={};
-                        if(this.formItem.headers) {
+                        if (this.formItem.headers) {
                             config.headers=JSON.parse(this.formItem.headers);
                         }
                         console.log(config);
@@ -153,14 +153,14 @@
                 localStorage.removeItem('address');
                 this.formItem.address = '';
             },
-            changeLanguage(){
+            changeLanguage() {
                 this.$i18n.locale==='zh'?this.$i18n.locale='en':this.$i18n.locale='zh';
                 localStorage.language=this.$i18n.locale;
             }
         },
         computed:{
-            language(){
-                return this.$i18n.locale==='zh'?'English':'Chinese';
+            language() {
+                return this.$i18n.locale==='zh' ? 'English' : '中文';
             }
         }
     }

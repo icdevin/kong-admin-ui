@@ -1,4 +1,4 @@
-# Kong admin UI
+# Kong Admin UI
 
 Kong 网关的管理界面
 
@@ -31,7 +31,7 @@ Kong 网关的管理界面
 1. 如果您的电脑可以访问外网，使用上面部署的demo
 2. 下载源码编译，部署到自己的server
 3. 下载编译好的包，解压部署到自己的server
-4. 使用docker部署 
+4. 使用docker部署
 
     ``` docker run -d --name kong-admin-ui -p 8899:80 pocketdigi/kong-admin-ui:0.5.3 ```
 

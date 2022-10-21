@@ -1,93 +1,101 @@
 <template>
-    <Row id="menu">
-        <Col span="24">
-            <Menu :theme="theme2" width="auto" v-bind:active-name="activeName" v-bind:open-names="openNames" ref="menu">
-                <router-link to="/">
-                    <MenuItem name="index">
-                        <Icon type="ios-stats"/>
-                        {{$t('breadcrumb.info')}}
-                    </MenuItem>
-                </router-link>
+  <Row>
+    <Col span="24">
+      <Menu
+        :theme="theme2"
+        width="auto"
+        v-bind:active-name="activeName"
+        v-bind:open-names="openNames"
+        ref="menu"
+      >
+        <MenuItem class="menu-item" name="index" to="/">
+          <Icon type="ios-stats" />
+          <span>{{ $t("breadcrumb.info") }}</span>
+        </MenuItem>
 
-                <router-link to="/services">
-                    <MenuItem name="service-list">
-                        <Icon type="ios-paper"/>
-                        {{$t('breadcrumb.services')}}
-                    </MenuItem>
-                </router-link>
+        <MenuItem class="menu-item" name="service-list" to="/services">
+          <Icon type="ios-paper" />
+          <span>{{$t("breadcrumb.services")}}</span>
+        </MenuItem>
 
-                <router-link to="/routes">
-                    <MenuItem name="route-list">
-                        <Icon type="ios-people"/>
-                        {{$t('breadcrumb.routes')}}
-                    </MenuItem>
-                </router-link>
+        <MenuItem class="menu-item" name="route-list" to="/routes">
+          <Icon type="ios-people" />
+          <span>{{ $t("breadcrumb.routes") }}</span>
+        </MenuItem>
 
-                <router-link to="/upstreams">
-                    <MenuItem name="upstream-list">
-                        <Icon type="ios-desktop"/>
-                        {{$t('breadcrumb.upstreams')}}
-                    </MenuItem>
-                </router-link>
+        <MenuItem class="menu-item" name="upstream-list" to="/upstreams">
+          <Icon type="ios-desktop" />
+          <span>{{$t("breadcrumb.upstreams")}}</span>
+        </MenuItem>
 
-                <router-link to="/consumers">
-                    <MenuItem name="consumer-list">
-                        <Icon type="ios-person"/>
-                        {{$t('breadcrumb.consumers')}}
-                    </MenuItem>
-                </router-link>
+        <MenuItem class="menu-item" name="consumer-list" to="/consumers">
+          <Icon type="ios-person" />
+          <span>{{$t("breadcrumb.consumers")}}</span>
+        </MenuItem>
 
-                <router-link to="/plugins">
-                    <MenuItem name="plugin-list">
-                        <Icon type="ios-glasses"/>
-                        {{$t('breadcrumb.plugins')}}
-                    </MenuItem>
-                </router-link>
-                <router-link to="/certificates">
-                    <MenuItem name="certificate-list">
-                        <Icon type="ios-key"/>
-                        {{$t('breadcrumb.certificates')}}
-                    </MenuItem>
-                </router-link>
-            </Menu>
-        </Col>
-    </Row>
+        <MenuItem class="menu-item" name="plugin-list" to="/plugins">
+          <Icon type="ios-glasses" />
+          <span>{{$t("breadcrumb.plugins")}}</span>
+        </MenuItem>
+        <MenuItem class="menu-item" name="certificate-list" to="/certificates">
+          <Icon type="ios-key" />
+          <span>{{$t("breadcrumb.certificates")}}</span>
+        </MenuItem>
+      </Menu>
+    </Col>
+  </Row>
 </template>
-<script>
-    import EventBus from '@/event-bus'
 
-    export default {
-        data() {
-            return {
-                theme2: 'dark',
-                activeName: '',
-                openNames: []
-            }
-        },
-        mounted() {
-            EventBus.$on('changePage', ({activeName, openNames}) => {
-                this.activeName = activeName;
-                this.openNames = openNames;
-                this.$nextTick(() => {
-                    if(this.$refs.menu){
-                        this.$refs.menu.updateOpened();
-                        this.$refs.menu.updateActiveName();
-                    }
-                })
-            });
-        },
-        destroyed() {
-            EventBus.$off('changePage');
+<script>
+import EventBus from "@/event-bus";
+import router from "../router";
+
+export default {
+  data() {
+    return {
+      theme2: "dark",
+      activeName: "",
+      openNames: [],
+    };
+  },
+  mounted() {
+    EventBus.$on("changePage", ({ activeName, openNames }) => {
+      this.activeName = activeName;
+      this.openNames = openNames;
+      this.$nextTick(() => {
+        if (this.$refs.menu) {
+          this.$refs.menu.updateOpened();
+          this.$refs.menu.updateActiveName();
         }
-    }
+      });
+    });
+  },
+  destroyed() {
+    EventBus.$off("changePage");
+  },
+  methods: {
+    navigate(where = "/") {
+      console.log(where);
+      router.push(where);
+    },
+  },
+};
 </script>
 
 <style scoped>
-    #menu {
-        background: #17233d;
-    }
-
-    .router-link-active {
-        color: white;
-    }
+.menu-item:hover {
+  background-color: #3e4555 !important;
+}
+.menu-item {
+  color: white;
+}
+.menu-item:hover {
+  text-decoration: none !important;
+}
+.ivu-menu-item {
+  display: flex;
+}
+.router-link-active {
+  color: white;
+}
 </style>

@@ -1,11 +1,11 @@
 <template>
     <div>
-        <Breadcrumb>
-            <BreadcrumbItem to="/">Home</BreadcrumbItem>
-            <BreadcrumbItem to="/upstreams">Upstream</BreadcrumbItem>
-            <BreadcrumbItem v-if="!edit">Add Upstream</BreadcrumbItem>
-            <BreadcrumbItem v-else>{{upstreamId}}</BreadcrumbItem>
-        </Breadcrumb>
+        <b-breadcrumb>
+            <b-breadcrumb-item href="/">Home</b-breadcrumb-item>
+            <b-breadcrumb-item href="/upstreams">Upstream</b-breadcrumb-item>
+            <b-breadcrumb-item v-if="!edit">Add Upstream</b-breadcrumb-item>
+            <b-breadcrumb-item v-else>{{upstreamId}}</b-breadcrumb-item>
+        </b-breadcrumb>
 
         <Form :model="formItem" :label-width="300" style="margin-top: 20px">
             <FormItem label="name:">
@@ -219,14 +219,14 @@
             </FormItem>
 
             <FormItem>
-                <Button type="primary" @click="saveService">Save</Button>
+                <b-button variant="primary" @click="saveService">Save</b-button>
             </FormItem>
         </Form>
         <div v-if="upstreamId">
             <Row>tags
                 <Col span="12"><h3>Targets:</h3></Col>
                 <Col span="12" style="text-align:right;position: absolute;top: 30%;right: 0px">
-                    <Button type="primary" size="small" @click="addTarget">Add Target</Button>
+                    <b-button variant="primary" size="sm" @click="addTarget">Add Target</b-button>
                 </Col>
             </Row>
             <TargetTable style="margin-top: 10px" v-bind:upstreamId="upstreamId"
@@ -310,7 +310,7 @@
                },
                 set: function (newValue) {
 
-                    if(newValue) {
+                    if (newValue) {
                         this.formItem.healthchecks.active.unhealthy.http_statuses=newValue.split(',').map((val)=>{return parseInt(val)}).filter(val => !isNaN(val));
                     }else {
                         this.formItem.healthchecks.active.unhealthy.http_statuses=[];
@@ -322,7 +322,7 @@
                     return this.formItem.healthchecks.active.healthy.http_statuses.join(',');
                 },
                 set: function (newValue) {
-                    if(newValue) {
+                    if (newValue) {
                         this.formItem.healthchecks.active.healthy.http_statuses=newValue.split(',').map((val)=>{return parseInt(val)}).filter(val => !isNaN(val));
                     }else {
                         this.formItem.healthchecks.active.healthy.http_statuses=[];
@@ -334,7 +334,7 @@
                     return this.formItem.healthchecks.passive.unhealthy.http_statuses.join(',');
                 },
                 set: function (newValue) {
-                    if(newValue) {
+                    if (newValue) {
                         this.formItem.healthchecks.passive.unhealthy.http_statuses=newValue.split(',').map((val)=>{return parseInt(val)}).filter(val => !isNaN(val));
                     }else {
                         this.formItem.healthchecks.passive.unhealthy.http_statuses=[];
@@ -346,7 +346,7 @@
                     return this.formItem.healthchecks.passive.healthy.http_statuses.join(',');
                 },
                 set: function (newValue) {
-                    if(newValue) {
+                    if (newValue) {
                         this.formItem.healthchecks.passive.healthy.http_statuses=newValue.split(',').map((val)=>{return parseInt(val)}).filter(val => !isNaN(val));
                     }else {
                         this.formItem.healthchecks.passive.healthy.http_statuses=[];
@@ -358,7 +358,7 @@
                     return this.formItem.tags.join(',');
                 },
                 set: function (newValue) {
-                    if(newValue) {
+                    if (newValue) {
                         this.formItem.tags=newValue.split(',');
                     }else {
                         this.formItem.tags=[];
@@ -370,7 +370,7 @@
             this.upstreamId=this.$route.params.id;
             this.formItem.name=this.$route.params.name;
             this.edit=this.upstreamId!=null;
-            if(this.edit) {
+            if (this.edit) {
                 this.loadUpstream();
             }
             this.loadCertificates();
@@ -407,7 +407,7 @@
                 }else{
                     this.formItem.client_certificate=null;
                 }
-                if(!this.edit){
+                if (!this.edit) {
                     this._post('/upstreams/',this.formItem,()=>{
                         _this.$router.go(-1);
                     });
@@ -421,7 +421,7 @@
             loadUpstream() {
                 this._get('/upstreams/' + this.upstreamId,response => {
                     this.formItem = response.data;
-                    if(this.formItem.client_certificate) {
+                    if (this.formItem.client_certificate) {
                         this.client_certificate_id=this.formItem.client_certificate.id;
                     }
                     this.$refs.targetTable.loadTargets();

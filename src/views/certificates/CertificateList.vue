@@ -1,13 +1,13 @@
 <template>
     <div id="content">
-        <Breadcrumb>
-            <BreadcrumbItem to="/">Home</BreadcrumbItem>
-            <BreadcrumbItem to="/certificate">Certificate</BreadcrumbItem>
-        </Breadcrumb>
+        <b-breadcrumb>
+            <b-breadcrumb-item href="#/">Home</b-breadcrumb-item>
+            <b-breadcrumb-item href="#/certificate">Certificate</b-breadcrumb-item>
+        </b-breadcrumb>
         <Row>
-            <Col span="12"> <h1>{{$t('breadcrumb.certificate_list')}}:</h1></Col>
+            <Col span="12"> <h1>{{$t('breadcrumb.certificate_list')}}</h1></Col>
             <Col span="12" style="text-align:right;position: absolute;top: 30%;right: 0px">
-                <Button type="primary" size="small" @click="addCertificate">{{$t('breadcrumb.add_certificate')}}</Button>
+                <b-button variant="primary" size="sm" @click="addCertificate">{{$t('breadcrumb.add_certificate')}}</b-button>
             </Col>
         </Row>
 
@@ -17,8 +17,8 @@
                     <strong>{{ row.name }}</strong>
                 </template>
                 <template slot-scope="{ row }" slot="action">
-                    <Button type="primary" size="small" style="margin-right: 5px" @click="edit(row.id)">{{$t('common.view')}}</Button>
-                    <Button type="error" size="small" @click="deleteDialog(row.id)">{{$t('common.delete')}}</Button>
+                    <b-button variant="primary" size="sm" style="margin-right: 5px" @click="edit(row.id)">{{$t('common.view')}}</b-button>
+                    <b-button variant="error" size="sm" @click="deleteDialog(row.id)">{{$t('common.delete')}}</b-button>
                 </template>
             </Table>
         </div>
@@ -40,7 +40,7 @@
     import EventBus from '@/event-bus'
     export default {
         name: "CertificateList",
-        data (){
+        data () {
             return {
                 certificates:[],
                 loading: true,
