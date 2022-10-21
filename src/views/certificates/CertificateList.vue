@@ -4,12 +4,10 @@
             <b-breadcrumb-item href="#/">Home</b-breadcrumb-item>
             <b-breadcrumb-item href="#/certificate">Certificate</b-breadcrumb-item>
         </b-breadcrumb>
-        <Row>
-            <Col span="12"> <h1>{{$t('breadcrumb.certificate_list')}}</h1></Col>
-            <Col span="12" style="text-align:right;position: absolute;top: 30%;right: 0px">
-                <b-button variant="primary" size="sm" @click="addCertificate">{{$t('breadcrumb.add_certificate')}}</b-button>
-            </Col>
-        </Row>
+        <div class="header">
+            <h1>{{$t('breadcrumb.certificate_list')}}</h1>
+            <b-button variant="primary" size="sm" @click="addCertificate">{{$t('breadcrumb.add_certificate')}}</b-button>
+        </div>
 
         <div id="table">
             <Table border :columns="columns" :data="certificates" :loading="loading">
@@ -135,6 +133,13 @@
 </script>
 
 <style scoped>
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 10px 0;
+    }
+
     .page {
         text-align: right;
         margin-top: 10px;

@@ -2,14 +2,15 @@
 
 [中文](README_zh.md)
 
-A web UI for the Kong (the cloud-native API gateway & service mesh) admin API.
+A web UI for the Kong (the cloud-native API gateway & service mesh) Admin API.
 
-It's a front-end application, no need any back-end server. All requests to Kong admin API is sent by user's browser.
+It's a browser-only application with no backend server other than your Kong instance. All requests to Kong Admin API is sent by the browser.
 
-If you can visit our [demo](https://pocketdigi.github.io/kong-admin-ui), and your current device can visit kong admin API directly, you can use our demo to manage your Kong, it's safe.
+If you can visit our [demo](https://pocketdigi.github.io/kong-admin-ui), and your current device can visit kong Admin API directly, it's safe to use our demo to manage your Kong.
 
-[Demo on GitHub page](https://pocketdigi.github.io/kong-admin-ui) `https` protocol, so your Kong admin API must `https` too.
-[Demo on pocketdigi.com](http://kong-admin.pocketdigi.com) `http` protocol, the server is in China.
+[Demo on GitHub page](https://pocketdigi.github.io/kong-admin-ui): `https` protocol, so your Kong Admin API must `https` too.
+
+[Demo on pocketdigi.com](http://kong-admin.pocketdigi.com): `http` protocol, the server is in China.
 
 ## Features
 * Basic info (configurations and status)
@@ -23,20 +24,17 @@ If you can visit our [demo](https://pocketdigi.github.io/kong-admin-ui), and you
 
 **Only supports Kong 0.14.x and above.**
 
-From version 0.3, we support custom headers, so you can use Basic Authentication plugin and CORS plugin on your Kong Admin Service, and add credential on header.
-
-[kong admin ui Custom Headers使用说明 给你的kong加个密码](https://www.pocketdigi.com/20190613/1644.html)
+From version 0.3, we support custom headers, so you can use Basic Authentication and CORS plugins on your Kong Admin Service, and add credential in headers.
 
 ## Usage
-1. If your computer can visit Kong admin API and intenet, you can use the demo we deployed.
+1. If your computer can visit Kong Admin API and access the intenet, you can use the demo we deployed.
 2. Clone the source code, compile, deploy with nginx
 3. Download the zip we packed，deploy with nginx
 4. Deploy with docker
 
-    ``` docker run -d --name kong-admin-ui -p 8899:80 pocketdigi/kong-admin-ui:0.5.3 ```
+    ``` docker run -d --name kong-admin-ui -p 8899:80 icdevin/kong-admin-ui:0.6.1 ```
 
 ## Screenshots
-
 
 ![basic info](https://github.com/pocketdigi/kong-admin-ui/raw/master/docs/images/basic_info.png)
 
